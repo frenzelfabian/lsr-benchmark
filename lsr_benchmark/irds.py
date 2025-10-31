@@ -110,14 +110,10 @@ class LsrBenchmarkDocument(NamedTuple):
     @staticmethod
     def _from_json(json_doc):
         segments = [Segment(int(i["start"]), int(i["end"]), i["text"]) for i in json_doc["segments"]]
-        return LsrBenchmarkDocument(json_doc["doc_id"], segments, LsrBenchmarkDocument._default_text(segments))
-
-    @staticmethod
-    def _default_text(segments):
-        return "" if len(segments) == 0 else segments[0].text
+        return LsrBenchmarkDocument(json_doc["doc_id"], segments, json_doc["default_text"])
 
     def default_text(self):
-        return LsrBenchmarkDocument._default_text(self.segments)
+        return self.text
 
 
 class LsrBenchmarkDocumentEmbedding(NamedTuple):
