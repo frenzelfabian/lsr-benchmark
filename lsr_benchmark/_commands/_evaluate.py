@@ -266,18 +266,27 @@ def evaluate(approaches: list[str], measure: list[str], out: str, upload: bool) 
 
     scores: list = []
     from tqdm import tqdm
+    dataset_to_already_uploaded_approaches = {}
     for approach in tqdm(approaches):
         scores_of_approach = evaluate_approach(approach, measure)
         scores += [scores_of_approach]
 
         if upload:
             from tira.tira_cli import upload_command
+            from tira.rest_api_client import Client
             from lsr_benchmark.irds import TIRA_LSR_TASK_ID
             import time
             approach_name = Path(approach).name + "-on-" + scores_of_approach["embedding/model"].replace("/", "-")
             metadata_of_run = yaml.safe_load(open(Path(approach) / "retrieval-metadata.yml"))
             team = metadata_of_run["actor"]["team"]
             dataset = metadata_of_run["data"]["test collection"]["name"]
+
+            if dataset not in dataset_to_already_uploaded_approaches:
+                tira = Client()
+                dataset_to_already_uploaded_approaches[dataset] = set(tira.submissions(TIRA_LSR_TASK_ID, dataset)["software"].unique())
+
+            if approach_name in dataset_to_already_uploaded_approaches[dataset]:
+                continue
 
             upload_command(dataset=dataset, directory=approach, dry_run=False, system=approach_name, tira_vm_id=team, default_task=TIRA_LSR_TASK_ID)
             time.sleep(2)
