@@ -63,6 +63,8 @@ We have a set of [tutorials available](tutorials).
 
 The `lsr-benchmark --help` command serves as entrypoint to the documentation.
 
+Instructions to add new datasets are available in the [data directory](data).
+
 - ToDo: Write how to add new datasets, embeddings, retrieval, evaluation
   - short video
 

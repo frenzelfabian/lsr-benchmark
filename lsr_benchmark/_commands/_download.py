@@ -57,7 +57,8 @@ def download_embeddings(dataset, embedding, out):
 )
 def download_run(dataset, embedding, retrieval, out):
     tira = Client()
-    ret = tira.get_run_output(f'lsr-benchmark/lightning-ir/{embedding}', IR_DATASET_TO_TIRA_DATASET[dataset])
+    system_name = f'lsr-benchmark/reneuir-baselines/{retrieval}-on-{embedding.replace("/", "-")}'
+    ret = tira.get_run_output(system_name, IR_DATASET_TO_TIRA_DATASET[dataset])
     if out is not None:
         copytree(ret, out)
         ret = out
