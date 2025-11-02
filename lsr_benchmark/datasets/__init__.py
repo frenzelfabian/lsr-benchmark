@@ -36,6 +36,60 @@ TIRA_DATASET_ID_TO_IR_DATASET_ID = {
     'trec-robust-2004-fold-5-20250926-test': 'disks45/nocr/trec-robust-2004/fold5'
 }
 
+EMBEDDING_MODEL_TO_PRETTY_NAME = {
+    "naver-splade-v3": "Splade 3",
+    "webis-splade": "Splade (webis)",
+    "naver-splade-v3-distilbert": "Splade 3 Dist.",
+    "naver-splade_v2_distil": "Splade 2 Dist.",
+    "naver-splade-v3-doc": "Splade 3 Doc",
+    "castorini-unicoil-noexp-msmarco-passage": "UniCoil",
+    "opensearch-project-opensearch-neural-sparse-encoding-doc-v2-mini": "OS 2 Mini Doc",
+    "opensearch-project-opensearch-neural-sparse-encoding-doc-v3-distill": "OS 3 Dist. Doc",
+    "naver-splade-v3-lexical": "Splade 3 Lex.",
+    "opensearch-project-opensearch-neural-sparse-encoding-doc-v2-distill": "OS 2 Dist. Doc",
+    "opensearch-project-opensearch-neural-sparse-encoding-v2-distill": "OS 2 Dist.",
+    "bge-m3": "BGE m3",
+    "bm25": "BM25",
+}
+
+EMBEDDING_MODEL_TO_HF_NAME = {
+    "naver-splade-v3": "https://huggingface.co/naver/splade-v3",
+    "webis-splade": "https://huggingface.co/webis/splade",
+    "naver-splade-v3-distilbert": "https://huggingface.co/naver/splade-v3-distilbert",
+    "naver-splade_v2_distil": "https://huggingface.co/naver/splade_v2_distil",
+    "naver-splade-v3-doc": "https://huggingface.co/naver/splade-v3-doc",
+    "castorini-unicoil-noexp-msmarco-passage": "https://huggingface.co/castorini/unicoil-noexp-msmarco-passage",
+    "opensearch-project-opensearch-neural-sparse-encoding-doc-v2-mini": "https://huggingface.co/opensearch-project/opensearch-neural-sparse-encoding-doc-v2-mini",
+    "opensearch-project-opensearch-neural-sparse-encoding-doc-v3-distill": "https://huggingface.co/opensearch-project/opensearch-neural-sparse-encoding-doc-v3-distill",
+    "naver-splade-v3-lexical": "https://huggingface.co/naver/splade-v3-lexical",
+    "opensearch-project-opensearch-neural-sparse-encoding-doc-v2-distill": "https://huggingface.co/opensearch-project/opensearch-neural-sparse-encoding-doc-v2-distill",
+    "opensearch-project-opensearch-neural-sparse-encoding-v2-distill": "https://huggingface.co/opensearch-project/opensearch-neural-sparse-encoding-v2-distill",
+    "bge-m3": "https://huggingface.co/BAAI/bge-m3",
+    "bm25": "https://pages.nist.gov/trec-browser/trec4/proceedings/#okapi-at-trec-4",
+}
+
+EMBEDDING_MODEL_TO_ENGINE = {
+    "naver-splade-v3": "lightning-ir",
+    "webis-splade": "lightning-ir",
+    "naver-splade-v3-distilbert": "lightning-ir",
+    "naver-splade_v2_distil": "lightning-ir",
+    "naver-splade-v3-doc": "lightning-ir",
+    "castorini-unicoil-noexp-msmarco-passage": "lightning-ir",
+    "opensearch-project-opensearch-neural-sparse-encoding-doc-v2-mini": "lightning-ir",
+    "opensearch-project-opensearch-neural-sparse-encoding-doc-v3-distill": "lightning-ir",
+    "naver-splade-v3-lexical": "lightning-ir",
+    "opensearch-project-opensearch-neural-sparse-encoding-doc-v2-distill": "lightning-ir",
+    "opensearch-project-opensearch-neural-sparse-encoding-v2-distill": "lightning-ir",
+    "bge-m3": "FlagEmbedding",
+    "bm25": "PyTerrier"
+}
+
+EMBEDDING_ENGINE_LINKS = {
+    "PyTerrier": "https://github.com/reneuir/lsr-benchmark/blob/main/step-02-embedding-approaches/lexical/run-pyterrier.py",
+    "FlagEmbedding": "https://github.com/reneuir/lsr-benchmark/blob/main/step-02-embedding-approaches/bge-m3/bgem3.py",
+    "lightning-ir": "https://github.com/reneuir/lsr-benchmark/blob/main/step-02-embedding-approaches/lightning-ir/lightning-ir.py",
+}
+
 IR_DATASET_TO_TIRA_DATASET = {v:k for k, v in TIRA_DATASET_ID_TO_IR_DATASET_ID.items()}
 
 SUPPORTED_IR_DATASETS = sorted(list(TIRA_DATASET_ID_TO_IR_DATASET_ID.keys()) + ["tiny-example-20251002_0-training"])
