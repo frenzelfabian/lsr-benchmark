@@ -20,6 +20,12 @@ def load_docs(ir_datasets_id, subsample):
     return ret
 
 def irds_id_from_config(config):
+    if "ir-datasets-id" not in config:
+        from lsr_benchmark.chatnoir import register_subsample_from_chatnoir
+        ir_datasets_id = "chatnoir/" + config["chatnoir-index"]
+        register_subsample_from_chatnoir(config["chatnoir-index"], config["qrels"], config["topics"], ir_datasets_id)
+        return ir_datasets_id
+
     ir_datasets_id = config["ir-datasets-id"]
     if ir_datasets_id.startswith("clueweb"):
         from ir_datasets_subsample import register_subsamples
