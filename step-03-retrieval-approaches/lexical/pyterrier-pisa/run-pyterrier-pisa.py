@@ -9,16 +9,15 @@ from shutil import rmtree
 import pandas as pd
 from tira.third_party_integrations import ensure_pyterrier_is_loaded,  normalize_run
 import ir_datasets
-from lsr_benchmark.utils import ClickParamTypeLsrDataset
+from lsr_benchmark.click import  option_lsr_dataset, option_retrieval_depth
 from math import floor
 from pyterrier_pisa import PisaIndex
 
 
 @click.command()
-@click.option("--dataset", type=ClickParamTypeLsrDataset(), required=True, help="The dataset id or a local directory.")
+@option_lsr_dataset()
+@option_retrieval_depth()
 @click.option("--precompute-impact", type=bool, is_flag=True, default=False, required=False, help="Pre-compute impact scores. This speeds up retrieval..")
-@click.option("--output", required=True, type=Path, help="The directory where the output should be stored.")
-@click.option("--k", type=int, required=False, default=10, help="The retrieval depth.")
 def main(dataset, output, k, precompute_impact):
     output.mkdir(parents=True, exist_ok=True)
     lsr_benchmark.register_to_ir_datasets(dataset)
