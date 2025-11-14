@@ -3,7 +3,7 @@ from pathlib import Path
 import os
 
 
-def option_lsr_dataset()
+def option_lsr_dataset():
     import click
     class ClickParamTypeLsrDataset(click.ParamType):
         name = "dataset_or_dir"
