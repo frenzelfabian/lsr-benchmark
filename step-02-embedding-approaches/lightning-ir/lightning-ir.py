@@ -5,8 +5,8 @@ import numpy as np
 import torch
 from lightning_ir import BiEncoderModule, DocDataset, LightningIRDataModule, LightningIRTrainer, QueryDataset
 from tirex_tracker import tracking, register_metadata
-from lsr_benchmark.utils import ClickParamTypeLsrDataset
 import lsr_benchmark
+from lsr_benchmark.click import option_lsr_dataset
 
 
 def convert_embeddings(embeddings: torch.Tensor):
@@ -17,7 +17,7 @@ def convert_embeddings(embeddings: torch.Tensor):
 
 
 @click.command()
-@click.option("--dataset", type=ClickParamTypeLsrDataset(), required=True, help="The dataset id or a local directory.")
+@option_lsr_dataset()
 @click.option("--model", type=str, required=True, help="The lightning ir model.")
 @click.option("--batch_size", type=int, default=4, help="Number of queries/documents to process in a batch.")
 @click.option("--save_dir", type=Path, required=True, help="Directory to save output embeddings.")
