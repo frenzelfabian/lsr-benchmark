@@ -221,6 +221,15 @@ class LsrBenchmarkDataset(Dataset):
     def doc_embeddings(self, model_name: str) -> tuple[np.ndarray, np.ndarray, np.ndarray, list[str]]:
         return embeddings(self.__irds_id, model_name, "doc")
 
+    def dataset_id(self):
+        return "lsr-benchmark/" + TIRA_DATASET_ID_TO_IR_DATASET_ID.get(self.__irds_id, self.__irds_id)
+
+    def docs_store(self):
+        ret = {}
+        for doc in self.docs_iter():
+            ret[doc.doc_id] = doc
+        return ret
+
 
 def extract_zip(zip_file: Path, target_directory: Path):
     if target_directory.exists():

@@ -34,9 +34,11 @@ class TestIrdsIntegration(unittest.TestCase):
         register_to_ir_datasets("msmarco-passage/trec-dl-2019/judged")
         ds = ir_datasets.load("lsr-benchmark/msmarco-passage/trec-dl-2019/judged")
 
+        self.assertEqual("lsr-benchmark/msmarco-passage/trec-dl-2019/judged", ds.dataset_id())
         self.assertEqual(43, len(list(ds.queries_iter())))
         self.assertEqual(32123, len(list(ds.docs_iter())))
         self.assertEqual(9260, len(list(ds.qrels_iter())))
+        self.assertEqual(32123, len(ds.docs_store().keys()))
 
     def test_all_datasets_can_be_loaded(self):
         for i in range(3):
