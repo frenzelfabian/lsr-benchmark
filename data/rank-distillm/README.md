@@ -13,7 +13,7 @@ tira_configs:
   resolve_inputs_to: "."
   resolve_truths_to: "."
   baseline:
-    link: https://github.com/reneuir/lsr-benchmark/tree/main/step-03-retrieval-approaches/pyterrier-naive
+    link: https://github.com/reneuir/lsr-benchmark/tree/main/step-03-retrieval-approaches/lexical/pyterrier-naive
     command: /run-pyterrier.py --dataset $inputDataset --retrieval BM25 --output $outputDir
     format:
       name: ["run.txt", "lightning-ir-document-embeddings", "lightning-ir-query-embeddings"]
