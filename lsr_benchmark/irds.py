@@ -1,6 +1,8 @@
+import os
 import zipfile
+from glob import glob
 from pathlib import Path
-from typing import List, NamedTuple, TYPE_CHECKING
+from typing import TYPE_CHECKING, List, NamedTuple
 
 import numpy as np
 from ir_datasets.datasets.base import Dataset
@@ -9,8 +11,7 @@ from ir_datasets.util import MetadataComponent
 from tira.check_format import JsonlFormat, QueryProcessorFormat
 from tira.third_party_integrations import in_tira_sandbox
 from tqdm import tqdm
-import os
-from glob import glob
+
 from lsr_benchmark.datasets import TIRA_DATASET_ID_TO_IR_DATASET_ID
 
 if TYPE_CHECKING:
@@ -222,17 +223,6 @@ class LsrBenchmarkDataset(Dataset):
 
     def dataset_id(self):
         return "lsr-benchmark/" + TIRA_DATASET_ID_TO_IR_DATASET_ID.get(self.__irds_id, self.__irds_id)
-
-    def docs_store(self):
-        class DocsStore(dict):
-            def built(self):
-                return True
-        ret = DocsStore()
-
-        for doc in self.docs_iter():
-            ret[doc.doc_id] = doc
-
-        return ret
 
 
 def extract_zip(zip_file: Path, target_directory: Path):
