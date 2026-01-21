@@ -10,6 +10,7 @@ import ir_datasets
 from lsr_benchmark.click import retrieve_command
 from math import floor
 from pyterrier_pisa import PisaIndex
+from tempfile import TemporaryDirectory
 
 def pyt_splade_encode(tokens, values, scale=100):
     return {str(k): floor(v*scale) for k,v in zip(tokens, values) if floor(v*scale) > 0}
@@ -32,10 +33,10 @@ def main(dataset, output, embedding, k):
     for (doc_id, tokens, values) in tqdm(ir_dataset.doc_embeddings(model_name=embedding), "transform dataset"):
         documents.append({'docno' : doc_id, 'toks': pyt_splade_encode(tokens, values)})
 
-    with tracking(export_file_path=output / "index-metadata.yml", export_format=ExportFormat.IR_METADATA):
-        rmtree("/tmp/.ignored", ignore_errors=True)
-        index = PisaIndex("/tmp/.ignored", stemmer='none')
-        index.index(tqdm(documents, "Index docs"))
+    with TemporaryDirectory() as tmpdir:
+        with tracking(export_file_path=output / "index-metadata.yml", export_format=ExportFormat.IR_METADATA):
+            index = PisaIndex(tmpdir.name, stemmer='none')
+            index.index(tqdm(documents, "Index docs"))
 
     rmtree(output / ".tirex-tracker")
     queries = []
