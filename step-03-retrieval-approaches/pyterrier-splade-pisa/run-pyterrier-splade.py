@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 import lsr_benchmark
-import click
 from tirex_tracker import tracking, ExportFormat, register_metadata
 from tqdm import tqdm
 import pyterrier as pt
-from pathlib import Path
 from shutil import rmtree
 import pandas as pd
 from tira.third_party_integrations import ensure_pyterrier_is_loaded,  normalize_run

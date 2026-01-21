@@ -1,8 +1,6 @@
 # The code is taken from https://github.com/webis-de/ecir25-corpus-subsampling/blob/main/tests/test_run_pool_corpus_sampler.py
-import gzip
 import json
 from abc import ABC, abstractmethod
-from pathlib import Path
 from tqdm import tqdm
 from glob import glob
 

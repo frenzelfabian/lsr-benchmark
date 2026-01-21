@@ -1,21 +1,16 @@
 #!/usr/bin/env python3
 import lsr_benchmark
-import click
 from tirex_tracker import tracking, ExportFormat, register_metadata
 from tqdm import tqdm
-from pathlib import Path
-import pandas as pd
 from shutil import rmtree
 from more_itertools import chunked
 import ir_datasets
 from lsr_benchmark.click import retrieve_command
-from math import floor
 import gzip
 
-import itertools
 import json
 import os
-from typing import Iterable, List
+from typing import Iterable
 
 # This needs to be in the middle of the imports, if not it breaks.
 from pyserini import __file__ as pyserini_file

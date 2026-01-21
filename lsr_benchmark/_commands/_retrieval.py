@@ -9,7 +9,6 @@ from pathlib import Path
 from lsr_benchmark.datasets import all_embeddings, all_datasets
 import shutil
 import yaml
-import json
 
 
 def run_foo(docker_image, command, dataset_id, embedding, output_dir=None):

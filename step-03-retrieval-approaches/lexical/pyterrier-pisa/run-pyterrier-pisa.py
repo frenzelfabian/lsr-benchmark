@@ -4,13 +4,11 @@ import click
 from tirex_tracker import tracking, ExportFormat, register_metadata
 from tqdm import tqdm
 import pyterrier as pt
-from pathlib import Path
 from shutil import rmtree
 import pandas as pd
 from tira.third_party_integrations import ensure_pyterrier_is_loaded,  normalize_run
 import ir_datasets
 from lsr_benchmark.click import  option_lsr_dataset, option_retrieval_depth
-from math import floor
 from pyterrier_pisa import PisaIndex
 
 

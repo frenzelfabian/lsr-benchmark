@@ -2,7 +2,7 @@ import os
 import zipfile
 from glob import glob
 from pathlib import Path
-from typing import TYPE_CHECKING, List, NamedTuple
+from typing import List, NamedTuple
 
 import numpy as np
 from ir_datasets.datasets.base import Dataset
@@ -14,8 +14,6 @@ from tqdm import tqdm
 
 from lsr_benchmark.datasets import TIRA_DATASET_ID_TO_IR_DATASET_ID
 
-if TYPE_CHECKING:
-    from typing import Optional
 
 TIRA_LSR_TASK_ID = "lsr-benchmark"
 

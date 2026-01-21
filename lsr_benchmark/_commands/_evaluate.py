@@ -1,6 +1,5 @@
 import logging
 import re
-from collections import defaultdict
 from glob import glob
 from gzip import GzipFile
 from io import TextIOWrapper
