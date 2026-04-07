@@ -13,4 +13,8 @@ RUN pip3 install -r /tmp/requirements.txt \
 	&& rm -Rf /tmp/requirements.txt \
 	&& pip3 cache purge
 
+RUN pip3 install --no-deps ir-datasets
+
+RUN pip3 install lsr-benchmark
+
 ADD build-and-search-naive-index.py /build-and-search-naive-index.py

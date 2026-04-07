@@ -1,12 +1,15 @@
 ## Submission
 
+
+
 ```
 tira-cli code-submission \
     --path . \
     --task lsr-benchmark \
     --tira-vm-id reneuir-baselines \
     --dataset tiny-example-20251002_0-training \
-    --command '/build-and-search-naive-index.py --dataset $inputDataset --use-u32 true  --embedding naver/splade-v3 --output $outputDir' \
+    --command '/build-and-search-naive-index.py --dataset $inputDataset --use-u32 true --embedding $embeddings --output $outputDir' \
+    --mount-directory '$embeddings=lsr-benchmark/lightning-ir/naver-splade-v3-doc' \
     --dry-run
 ```
 
@@ -17,7 +20,8 @@ tira-cli code-submission \
     --task lsr-benchmark \
     --tira-vm-id reneuir-baselines \
     --dataset tiny-example-20251002_0-training \
-    --command '/build-and-search-naive-index.py --dataset $inputDataset --embedding naver/splade-v3 --output $outputDir' \
+    --command '/build-and-search-naive-index.py --dataset $inputDataset --embedding $embeddings --output $outputDir' \
+    --mount-directory '$embeddings=lsr-benchmark/lightning-ir/naver-splade-v3-doc' \
     --dry-run
 ```
 
