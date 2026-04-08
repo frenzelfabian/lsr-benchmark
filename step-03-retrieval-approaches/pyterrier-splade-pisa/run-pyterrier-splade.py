@@ -33,10 +33,10 @@ def main(dataset, output, embedding, k):
     for (doc_id, tokens, values) in tqdm(ir_dataset.doc_embeddings(model_name=embedding), "transform dataset"):
         documents.append({'docno' : doc_id, 'toks': pyt_splade_encode(tokens, values)})
 
-    with TemporaryDirectory() as tmpdir:
-        with tracking(export_file_path=output / "index-metadata.yml", export_format=ExportFormat.IR_METADATA):
-            index = PisaIndex(tmpdir, stemmer='none')
-            index.index(tqdm(documents, "Index docs"))
+    tmpdir = TemporaryDirectory().name
+    with tracking(export_file_path=output / "index-metadata.yml", export_format=ExportFormat.IR_METADATA):
+        index = PisaIndex(tmpdir, stemmer='none')
+        index.index(tqdm(documents, "Index docs"))
 
     rmtree(output / ".tirex-tracker")
     queries = []
@@ -44,7 +44,7 @@ def main(dataset, output, embedding, k):
     for query_id, query_components, query_values in  ir_dataset.query_embeddings(model_name=embedding):
         queries.extend([{"qid": query_id, "query_toks": pyt_splade_encode(query_components, query_values)}])
 
-    pipeline =  index.quantized()
+    pipeline = index.quantized()
     with tracking(export_file_path=output / "retrieval-metadata.yml", export_format=ExportFormat.IR_METADATA):
         run = pipeline(pd.DataFrame(queries))
 
