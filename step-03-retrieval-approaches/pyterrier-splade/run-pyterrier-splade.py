@@ -32,9 +32,9 @@ def main(dataset, output, embedding, k):
     for (doc_id, tokens, values) in tqdm(ir_dataset.doc_embeddings(model_name=embedding), "transform dataset"):
         documents.append({'docno' : doc_id, 'toks': pyt_splade_encode(tokens, values)})
 
-    with TemporaryDirectory() as tmpdir:
-        with tracking(export_file_path=output / "index-metadata.yml", export_format=ExportFormat.IR_METADATA):
-            index = pt.IterDictIndexer(tmpdir.name, meta={'docno' : 100}, pretokenised=True, overwrite=True).index(tqdm(documents, "Index docs"))
+    tmpdir = TemporaryDirectory()
+    with tracking(export_file_path=output / "index-metadata.yml", export_format=ExportFormat.IR_METADATA):
+        index = pt.IterDictIndexer(tmpdir.name, meta={'docno' : 100}, pretokenised=True, overwrite=True).index(tqdm(documents, "Index docs"))
 
     rmtree(output / ".tirex-tracker")
     queries = []
