@@ -26,6 +26,17 @@ jobs:
         run: |
           pip3 install 'git+https://github.com/tira-io/tira.git@rag4reports#subdirectory=python-client'
 
+      - name: Test pyterrier-splade-pisa
+        run: |
+          tira-cli code-submission \
+              --path step-03-retrieval-approaches/pyterrier-splade-pisa/ \
+              --task lsr-benchmark \
+              --dataset tiny-example-20251002_0-training \
+              --command '/run-pyterrier-splade.py --dataset $inputDataset --embedding $embeddings --output $outputDir' \
+              --mount-directory '$embeddings=lsr-benchmark/lightning-ir/naver-splade-v3-doc' \
+              --platform host \
+              --dry-run
+
       - name: Test naive-search
         run: |
           tira-cli code-submission \
@@ -34,6 +45,18 @@ jobs:
               --dataset tiny-example-20251002_0-training \
               --command '/build-and-search-naive-index.py --dataset $inputDataset --embedding $embeddings --output $outputDir' \
               --mount-directory '$embeddings=lsr-benchmark/lightning-ir/naver-splade-v3-doc' \
+              --platform host \
+              --dry-run
+
+      - name: Test seismic
+        run: |
+          tira-cli code-submission \
+              --path step-03-retrieval-approaches/seismic/ \
+              --task lsr-benchmark \
+              --dataset tiny-example-20251002_0-training \
+              --command '/build-and-search-seismic-index.py --dataset $inputDataset --embedding $embeddings --output $outputDir' \
+              --mount-directory '$embeddings=lsr-benchmark/lightning-ir/naver-splade-v3-doc' \
+              --platform host \
               --dry-run
 
 #      - name: Test kannolo
@@ -46,23 +69,5 @@ jobs:
 #              --mount-directory '$embeddings=lsr-benchmark/lightning-ir/naver-splade-v3-doc' \
 #              --dry-run
 
-      - name: Test seismic
-        run: |
-          tira-cli code-submission \
-              --path step-03-retrieval-approaches/seismic/ \
-              --task lsr-benchmark \
-              --dataset tiny-example-20251002_0-training \
-              --command '/build-and-search-seismic-index.py --dataset $inputDataset --embedding $embeddings --output $outputDir' \
-              --mount-directory '$embeddings=lsr-benchmark/lightning-ir/naver-splade-v3-doc' \
-              --dry-run
 
-      - name: Test pyterrier-splade-pisa
-        run: |
-          tira-cli code-submission \
-              --path step-03-retrieval-approaches/pyterrier-splade-pisa/ \
-              --task lsr-benchmark \
-              --dataset tiny-example-20251002_0-training \
-              --command '/run-pyterrier-splade.py --dataset $inputDataset --embedding $embeddings --output $outputDir' \
-              --mount-directory '$embeddings=lsr-benchmark/lightning-ir/naver-splade-v3-doc' \
-              --dry-run
 
