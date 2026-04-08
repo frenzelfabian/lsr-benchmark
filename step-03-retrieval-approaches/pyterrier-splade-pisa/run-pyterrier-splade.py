@@ -35,7 +35,7 @@ def main(dataset, output, embedding, k):
 
     with TemporaryDirectory() as tmpdir:
         with tracking(export_file_path=output / "index-metadata.yml", export_format=ExportFormat.IR_METADATA):
-            index = PisaIndex(tmpdir.name, stemmer='none')
+            index = PisaIndex(tmpdir, stemmer='none')
             index.index(tqdm(documents, "Index docs"))
 
     rmtree(output / ".tirex-tracker")
