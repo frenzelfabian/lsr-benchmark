@@ -44,7 +44,8 @@ jobs:
       - name: Publish to TIRA
         run: |
           tira-cli login --token ${{ secrets.TIRA_CLIENT_TOKEN }}
-          tira-cli verify-installation --task lsr-benchmark --team reneuir-baselines
+#         TODO: Add this again when TIREx tracker binary is build for ARM as well.
+#          tira-cli verify-installation --task lsr-benchmark --team reneuir-baselines
           tira-cli code-submission \
               --path step-03-retrieval-approaches/${{ inputs.approach }} \
               --task lsr-benchmark \
