@@ -34,7 +34,7 @@ jobs:
       - name: Publish to TIRA
         run: |
           tira-cli login --token ${{ secrets.TIRA_CLIENT_TOKEN }}
-          tira-cli verify-installation
+          tira-cli verify-installation --task lsr-benchmark and --team reneuir-baselines
           tira-cli code-submission \
               --path step-03-retrieval-approaches/${{ inputs.directory }} \
               --task lsr-benchmark \
