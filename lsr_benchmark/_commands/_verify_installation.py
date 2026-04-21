@@ -7,11 +7,18 @@ from pathlib import Path
 
 from tempfile import TemporaryDirectory
 
+# TODO: Pull this from archive.tira.io
 EXAMPLE_RETRIEVAL_ENGINE = {
     "linux/amd64": {
-        "seismic": {
-            "image": "docker.io/mam10eks/seismic:0.0.2",
-            "command": "/build-and-search-seismic-index.py --dataset $inputDataset --embedding $embeddings --output $outputDir"
+        "naive-search": {
+            "image": "ghcr.io/reneuir/lsr-benchmark/naive-search:amd64-4b508-a8fba",
+            "command": "/build-and-search-naive-index.py --dataset $inputDataset --use-u32 true --embedding $embeddings --output $outputDir"
+        }
+    },
+    "linux/arm64": {
+        "naive-search": {
+            "image": "ghcr.io/reneuir/lsr-benchmark/naive-search:arm64-4b508-f7db4",
+            "command": "/build-and-search-naive-index.py --dataset $inputDataset --use-u32 true --embedding $embeddings --output $outputDir"
         }
     }
 }
@@ -47,10 +54,7 @@ def verify_installation() -> int:
     if platform not in ("linux/amd64", "linux/arm64"):
         log_message(f"The platform {docker_supported_target_platform()} is not supported.", _fmt.ERROR)
 
-    if platform == "linux/arm64":
-        raise ValueError("Platform arm64 is still in development...")
-
-    engine = EXAMPLE_RETRIEVAL_ENGINE[platform]["seismic"]
+    engine = EXAMPLE_RETRIEVAL_ENGINE[platform]["naive-search"]
     print_message(f"The platform {docker_supported_target_platform()} is supported.", _fmt.OK)
 
     embeddings = get_spot_check_embeddings(client)
