@@ -4,7 +4,7 @@ on:
   push: {}
 
 jobs:
-  tests:
+  verify-lsr-benchmark-installation:
     runs-on: ${{ matrix.runner.os }}  
     timeout-minutes: 30
     strategy:
