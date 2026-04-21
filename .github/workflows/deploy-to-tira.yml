@@ -9,7 +9,7 @@ on:
         default: ""
 
 jobs:
-  tests:
+  deploy:
     runs-on: ${{ matrix.runner.os }}  
     timeout-minutes: 45
     strategy:
@@ -33,6 +33,8 @@ jobs:
 
       - name: Publish to TIRA
         run: |
+          tira-cli login --token ${{ secrets.TIRA_CLIENT_TOKEN }}
+          tira-cli verify-installation
           tira-cli code-submission \
               --path step-03-retrieval-approaches/${{ inputs.directory }} \
               --task lsr-benchmark \
