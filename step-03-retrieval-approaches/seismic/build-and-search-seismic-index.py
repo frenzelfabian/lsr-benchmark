@@ -13,7 +13,7 @@ import gzip
 @retrieve_command()
 @click.option("--heap-factor", type=float, required=False, default=0.8, help="TBD.")
 @click.option("--query-cut", type=int, required=False, default=10, help="Number of posting lists to explore when searching for candidates.")
-@click.option("--use-u32", type=bool, required=False, default=False, help="Whether to use u32 for component ids, required for datasets with many components..")
+@click.option("--use-u32", type=bool, required=False, default=True, help="Whether to use u32 for component ids, required for datasets with many components..")
 def main(dataset, embedding, output, heap_factor, query_cut, k, use_u32):
     output.mkdir(parents=True, exist_ok=True)
     lsr_benchmark.register_to_ir_datasets(dataset)

@@ -1,4 +1,4 @@
-git+https://github.com/reneuir/lsr-benchmark.git
+lsr-benchmark
 tirex-tracker
 click
 pyserini

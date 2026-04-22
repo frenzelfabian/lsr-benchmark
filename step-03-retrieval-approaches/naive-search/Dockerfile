@@ -17,4 +17,4 @@ RUN pip3 install --no-deps ir-datasets
 
 RUN pip3 install lsr-benchmark
 
-ADD build-and-search-naive-index.py /build-and-search-naive-index.py
+ADD build-and-search-naive-index.py /index-and-retrieve.py

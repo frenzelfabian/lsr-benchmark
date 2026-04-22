@@ -13,4 +13,4 @@ RUN pip3 install -r /tmp/requirements.txt \
 	&& rm -Rf /tmp/requirements.txt \
 	&& pip3 cache purge
 
-ADD build-and-search-seismic-index.py /build-and-search-seismic-index.py
+ADD build-and-search-seismic-index.py /index-and-retrieve.py
