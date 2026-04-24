@@ -18,3 +18,19 @@ python sentence_transformers_embeddings.py \
 pip install pytest sentence-transformers
 python -m pytest test_embeddings.py -v
 ```
+
+## Submission
+
+Code submission to tira via (remove the --dry-run for upload):
+
+```
+tira-cli code-submission \
+    --path . \
+    --task lsr-benchmark \
+    --tira-vm-id sentence-transformers \
+    --dataset tiny-example-20251002_0-training \
+    --command '/sentence_transformers_embeddings.py --dataset $inputDataset --output $outputDir --model sentence-transformers/all-MiniLM-L6-v2' \
+    --mount-hf-model sentence-transformers/all-MiniLM-L6-v2 \
+    --dry-run
+```
+
