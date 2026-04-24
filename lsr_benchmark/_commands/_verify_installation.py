@@ -1,8 +1,7 @@
-from tira.io_utils import log_message, verify_tira_installation, FormatMsgType
 import os
 from tira.rest_api_client import Client
-from tira.check_format import _fmt, check_format, lines_if_valid, log_message
-from tira.io_utils import docker_supported_target_platform, verify_tirex_tracker
+from tira.check_format import _fmt, check_format, log_message
+from tira.io_utils import docker_supported_target_platform
 from pathlib import Path
 
 from tempfile import TemporaryDirectory
@@ -13,13 +12,47 @@ EXAMPLE_RETRIEVAL_ENGINE = {
         "naive-search": {
             "image": "ghcr.io/reneuir/lsr-benchmark/naive-search:amd64-4b508-a8fba",
             "command": "/build-and-search-naive-index.py --dataset $inputDataset --use-u32 true --embedding $embeddings --output $outputDir"
-        }
+        },
+        "seismic": {
+            "image": "ghcr.io/reneuir/lsr-benchmark/seismic:amd64-54d65-202d6",
+            "command": "/index-and-retrieve.py --dataset $inputDataset --embedding $embeddings --output $outputDir",
+        },
+        "pyterrier-splade": {
+            "image": "ghcr.io/reneuir/lsr-benchmark/pyterrier-splade:amd64-54d65-f87d4",
+            "command": "/index-and-retrieve.py --dataset $inputDataset --embedding $embeddings --output $outputDir",
+        },
+        "duckdb": {
+            "image": "",
+            "command": "/index-and-retrieve.py --dataset $inputDataset --embedding $embeddings --output $outputDir",
+        },
+        
+        "": {
+            "image": "",
+            "command": "/index-and-retrieve.py --dataset $inputDataset --embedding $embeddings --output $outputDir",
+        },
     },
     "linux/arm64": {
         "naive-search": {
             "image": "ghcr.io/reneuir/lsr-benchmark/naive-search:arm64-4b508-f7db4",
             "command": "/build-and-search-naive-index.py --dataset $inputDataset --use-u32 true --embedding $embeddings --output $outputDir"
-        }
+        },
+        "seismic": {
+            "image": "ghcr.io/reneuir/lsr-benchmark/seismic:arm64-54d65-ebb95",
+            "command": "/index-and-retrieve.py --dataset $inputDataset --embedding $embeddings --output $outputDir",
+        },
+        "pyterrier-splade": {
+            "image": "ghcr.io/reneuir/lsr-benchmark/pyterrier-splade:arm64-54d65-ab053",
+            "command": "/index-and-retrieve.py --dataset $inputDataset --embedding $embeddings --output $outputDir",
+        },
+        "duckdb": {
+            "image": "",
+            "command": "/index-and-retrieve.py --dataset $inputDataset --embedding $embeddings --output $outputDir",
+        },
+
+        "": {
+            "image": "",
+            "command": "/index-and-retrieve.py --dataset $inputDataset --embedding $embeddings --output $outputDir",
+        },
     }
 }
 
@@ -43,10 +76,10 @@ def verify_installation() -> int:
 
     def print_message(message, level):
         all_messages.append((message, level))
-        os.system("cls" if os.name == "nt" else "clear")
+        os.system("cls" if os.name == "nt" else "clear") # noqa: S605
         print("lsr-benchmark verify-installation")
-        for m, l in all_messages:
-            log_message(m, l)
+        for msg, lvl in all_messages:
+            log_message(msg, lvl)
 
     client = Client()
     platform = docker_supported_target_platform()
