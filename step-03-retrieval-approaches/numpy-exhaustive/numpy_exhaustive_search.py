@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 import gzip
-from pathlib import Path
-import click
 import numpy as np
 from tirex_tracker import ExportFormat, register_metadata, tracking
 import lsr_benchmark
