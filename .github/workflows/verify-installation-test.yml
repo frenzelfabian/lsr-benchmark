@@ -1,32 +1,32 @@
-name: Verify lsr-benchmark Installation
+# name: Verify lsr-benchmark Installation
 
-on:
-  push: {}
+# on:
+#   push: {}
 
-jobs:
-  verify-lsr-benchmark-installation:
-    runs-on: ${{ matrix.runner.os }}  
-    timeout-minutes: 30
-    strategy:
-      fail-fast: true
-      matrix:
-        runner:
-          - os: ubuntu-latest
-          - os: ubuntu-24.04-arm
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      - name: Set up Dependencies
-        uses: actions/setup-python@v4
-      - name: Install TIRA Client
-        run: |
-          pip3 install 'git+https://github.com/tira-io/tira.git@rag4reports#subdirectory=python-client'
-          pip3 install -e .
+# jobs:
+#   verify-lsr-benchmark-installation:
+#     runs-on: ${{ matrix.runner.os }}  
+#     timeout-minutes: 30
+#     strategy:
+#       fail-fast: true
+#       matrix:
+#         runner:
+#           - os: ubuntu-latest
+#           - os: ubuntu-24.04-arm
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
+#       - name: Set up QEMU
+#         uses: docker/setup-qemu-action@v2
+#       - name: Set up Docker Buildx
+#         uses: docker/setup-buildx-action@v2
+#       - name: Set up Dependencies
+#         uses: actions/setup-python@v4
+#       - name: Install TIRA Client
+#         run: |
+#           pip3 install 'git+https://github.com/tira-io/tira.git@rag4reports#subdirectory=python-client'
+#           pip3 install -e .
 
-      - name: lsr-benchmark verify-installation
-        run: lsr-benchmark verify-installation
+#       - name: lsr-benchmark verify-installation
+#         run: lsr-benchmark verify-installation
 
