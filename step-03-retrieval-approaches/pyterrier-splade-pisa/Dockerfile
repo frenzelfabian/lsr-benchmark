@@ -8,6 +8,8 @@ RUN pip3 install cmake
 
 ADD requirements.txt /tmp/requirements.txt
 
+ENV CMAKE_POLICY_VERSION_MINIMUM=3.5
+
 RUN pip3 install -r /tmp/requirements.txt
 
 RUN python3 -c "import pyterrier as pt; pt.init();" && apt-get install -y locales && locale-gen en_US.UTF-8
