@@ -2,4 +2,4 @@ lsr-benchmark
 tirex-tracker
 click
 python-terrier
-pyterrier_pisa
+git+https://github.com/frenzelfabian/pyterrier_pisa.git
