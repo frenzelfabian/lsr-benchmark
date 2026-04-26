@@ -2,7 +2,7 @@ FROM ubuntu:jammy
 
 
 RUN apt-get update \
-	&& apt-get install -y git openjdk-11-jdk python3 python3-pip build-essential patchelf
+	&& apt-get install -y git openjdk-11-jdk python3 python3-pip build-essential patchelf libtbb-dev libtbb2
 
 RUN pip3 install cmake
 
