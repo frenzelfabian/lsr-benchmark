@@ -2,7 +2,7 @@ FROM ubuntu:jammy
 
 
 RUN apt-get update \
-	&& apt-get install -y git openjdk-11-jdk python3 python3-pip
+	&& apt-get install -y git openjdk-11-jdk python3 python3-pip cmake build-essential patchelf
 
 ADD requirements.txt /tmp/requirements.txt
 
