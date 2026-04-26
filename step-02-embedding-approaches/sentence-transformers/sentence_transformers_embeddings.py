@@ -34,6 +34,7 @@ def embedd_text_with_model(model, texts, ids, output):
 def main(dataset: str, model: str, batch_size: int, output: Path):
     lsr_benchmark.register_to_ir_datasets(dataset)
     module = SentenceTransformer(model)
+    module.tokenizer.model_max_length = 512
     register_metadata({"actor": {"team": "sentence-transformers"}, "tag": model.replace('/', '-')})
 
     dataset_id = f"lsr-benchmark/{dataset}"
