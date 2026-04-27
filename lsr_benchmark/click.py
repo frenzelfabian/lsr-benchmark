@@ -1,4 +1,4 @@
-from lsr_benchmark.datasets import all_embeddings, all_datasets, IR_DATASET_TO_TIRA_DATASET, TIRA_DATASET_ID_TO_IR_DATASET_ID
+from lsr_benchmark.datasets import all_embeddings, all_dense_embeddings, all_datasets, IR_DATASET_TO_TIRA_DATASET, TIRA_DATASET_ID_TO_IR_DATASET_ID
 from pathlib import Path
 import os
 
@@ -60,6 +60,10 @@ def option_lsr_embedding():
             available_embeddings = all_embeddings()
             if value in available_embeddings:
                 return "lightning-ir/" + value
+
+            available_dense_embeddings = all_dense_embeddings()
+            if value in available_dense_embeddings:
+                return "sentence-transformers/" + value
 
             if os.path.isdir(value):
                 return os.path.abspath(value)

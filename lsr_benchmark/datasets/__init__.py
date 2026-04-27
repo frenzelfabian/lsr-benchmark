@@ -13,6 +13,14 @@ def all_embeddings():
             ret.add(embedding)
     return sorted(list(ret))
 
+def all_dense_embeddings():
+    return set([
+        "all-MiniLM-L6-v2", "paraphrase-MiniLM-L3-v2",
+        "msmarco-MiniLM-L6-v3", "paraphrase-TinyBERT-L6-v2",
+        "all-mpnet-base-v2", "intfloat-e5-large-v2",
+        "BAAI-bge-m3", "BAAI-bge-large-en-v1.5"
+    ])
+
 def all_datasets():
     overview = lsr_overview()
     return sorted(list(overview.keys()))
@@ -33,7 +41,11 @@ TIRA_DATASET_ID_TO_IR_DATASET_ID = {
     'trec-robust-2004-fold-2-20250926-test': 'disks45/nocr/trec-robust-2004/fold2',
     'trec-robust-2004-fold-3-20250926-test': 'disks45/nocr/trec-robust-2004/fold3',
     'trec-robust-2004-fold-4-20250926-test': 'disks45/nocr/trec-robust-2004/fold4',
-    'trec-robust-2004-fold-5-20250926-test': 'disks45/nocr/trec-robust-2004/fold5'
+    'trec-robust-2004-fold-5-20250926-test': 'disks45/nocr/trec-robust-2004/fold5',
+    'aila-statutes-20260426-training': 'rteb/aila/statutes',
+    'aila-casedocs-20260426-training': 'rteb/aila/casedocs',
+    'legal-summarization-20260427-training': 'rteb/legal-summarization',
+    'financebench-retrieval-20260427-training': 'rteb/financebench',
 }
 
 EMBEDDING_MODEL_TO_PRETTY_NAME = {
@@ -50,6 +62,9 @@ EMBEDDING_MODEL_TO_PRETTY_NAME = {
     "opensearch-project-opensearch-neural-sparse-encoding-v2-distill": "OS 2 Dist.",
     "bge-m3": "BGE m3",
     "bm25": "BM25",
+    "all-MiniLM-L6-v2": "all-MiniLM-L6-v2",
+    "paraphrase-MiniLM-L3-v2": "paraphrase-MiniLM-L3-v2",
+    "msmarco-MiniLM-L6-v3": "msmarco-MiniLM-L6-v3",
 }
 
 EMBEDDING_MODEL_TO_HF_NAME = {
@@ -80,6 +95,9 @@ EMBEDDING_MODEL_TO_ENGINE = {
     "naver-splade-v3-lexical": "lightning-ir",
     "opensearch-project-opensearch-neural-sparse-encoding-doc-v2-distill": "lightning-ir",
     "opensearch-project-opensearch-neural-sparse-encoding-v2-distill": "lightning-ir",
+    "all-MiniLM-L6-v2": "sentence-transformers",
+    "paraphrase-MiniLM-L3-v2": "sentence-transformers",
+    "msmarco-MiniLM-L6-v3": "sentence-transformers",
     "bge-m3": "FlagEmbedding",
     "bm25": "PyTerrier"
 }

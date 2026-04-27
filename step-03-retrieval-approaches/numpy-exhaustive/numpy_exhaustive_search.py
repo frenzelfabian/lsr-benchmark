@@ -46,11 +46,16 @@ def main(dataset, embedding, output, k):
         "tag": f"numpy-exhaustive-{embedding.replace('/', '-')}-{k}",
     })
 
+    print("Load embeddings...")
+    d_embeddings = load_embeddings(dataset, embedding, "doc")
+    q_embeddings = load_embeddings(dataset, embedding, "query")
+    print("Done loading embeddings.")
+
     with tracking(export_file_path=output / "index-metadata.yml", export_format=ExportFormat.IR_METADATA):
-        doc_ids, doc_embeddings = to_numpy_array(load_embeddings(dataset, embedding, "doc"))
+        doc_ids, doc_embeddings = to_numpy_array(d_embeddings)
+        query_ids, query_embeddings = to_numpy_array(q_embeddings)
 
     with tracking(export_file_path=output / "retrieval-metadata.yml", export_format=ExportFormat.IR_METADATA):
-        query_ids, query_embeddings = to_numpy_array(load_embeddings(dataset, embedding, "query"))
         results = retrieve(query_ids, query_embeddings, doc_ids, doc_embeddings, k)
 
     with gzip.open(output / "run.txt.gz", "wt") as f:
