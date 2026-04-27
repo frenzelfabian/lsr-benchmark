@@ -2,13 +2,15 @@ FROM ubuntu:jammy
 
 
 RUN apt-get update \
-	&& apt-get install -y git openjdk-11-jdk python3 python3-pip build-essential patchelf libtbb-dev libtbb2
+	&& apt-get install -y git openjdk-11-jdk python3 python3-pip build-essential patchelf libtbb-dev libtbb2 onetbb-dev
 
 RUN pip3 install cmake
 
 ADD requirements.txt /tmp/requirements.txt
 
 ENV CMAKE_POLICY_VERSION_MINIMUM=3.5
+ENV TBB_DIR=/usr/lib/cmake/TBB
+ENV CMAKE_PREFIX_PATH=/usr/lib/cmake/TBB:${CMAKE_PREFIX_PATH}
 
 RUN pip3 install -r /tmp/requirements.txt
 
