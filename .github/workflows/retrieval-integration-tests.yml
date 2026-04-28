@@ -82,6 +82,7 @@ jobs:
               --dry-run
 
       - name: Test numpy-exhaustive
+        run: |
           tira-cli code-submission \
               --path step-03-retrieval-approaches/numpy-exhaustive/ \
               --task lsr-benchmark \
