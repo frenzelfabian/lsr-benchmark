@@ -30,6 +30,16 @@ EXAMPLE_RETRIEVAL_ENGINE = {
             "image": "ghcr.io/reneuir/lsr-benchmark/numpy-exhaustive:amd64-bc9aa-9beac",
             "command": "/index-and-retrieve.py --dataset $inputDataset --embedding $embeddings --output $outputDir",
         },
+
+        "pyterrier-splade-pisa": {
+            "image": "ghcr.io/reneuir/lsr-benchmark/pyterrier-splade-pisa:amd64-9a003-3e45f",
+            "command": "/index-and-retrieve.py --dataset $inputDataset --embedding $embeddings --output $outputDir",
+        },
+
+        "kannolo": {
+            "image": "ghcr.io/reneuir/lsr-benchmark/kannolo:amd64-9a003-b8fc3",
+            "command": "/index-and-retrieve.py --dataset $inputDataset --embedding $embeddings --output $outputDir",
+        },
     },
     "linux/arm64": {
         "naive-search": {
@@ -51,6 +61,16 @@ EXAMPLE_RETRIEVAL_ENGINE = {
 
         "numpy-exhaustive": {
             "image": "ghcr.io/reneuir/lsr-benchmark/numpy-exhaustive:arm64-bc9aa-00322",
+            "command": "/index-and-retrieve.py --dataset $inputDataset --embedding $embeddings --output $outputDir",
+        },
+
+        "pyterrier-splade-pisa": {
+            "image": "ghcr.io/reneuir/lsr-benchmark/pyterrier-splade-pisa:arm64-9a003-310b7",
+            "command": "/index-and-retrieve.py --dataset $inputDataset --embedding $embeddings --output $outputDir",
+        },
+
+        "kannolo": {
+            "image": "ghcr.io/reneuir/lsr-benchmark/kannolo:arm64-9a003-058ea",
             "command": "/index-and-retrieve.py --dataset $inputDataset --embedding $embeddings --output $outputDir",
         },
     }
