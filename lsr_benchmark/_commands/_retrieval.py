@@ -67,9 +67,6 @@ def get_approach_to_execution(approaches, platform, embedding, print_message):
         else:
             approach_path = Path(approach)
             if not approach_path.is_dir():
-                # Fall back to the bundled approaches directory, resolved relative to the
-                # repo root (this file lives in <repo>/lsr_benchmark/_commands/), so it works
-                # regardless of the current working directory.
                 approach_path = Path(__file__).resolve().parents[2] / "step-03-retrieval-approaches" / approach
             if not approach_path.is_dir():
                 raise ValueError(
@@ -77,7 +74,7 @@ def get_approach_to_execution(approaches, platform, embedding, print_message):
                     f"(looked in '{approach}' and 'step-03-retrieval-approaches/{approach}')."
                 )
             docker_tag, zipped_code, remotes, commit, active_branch = tira.build_docker_image_from_code(
-                approach_path, log_message, False
+                approach_path, log_message, False, platform=platform
             )
             if docker_tag in approach_to_execution.values():
                 raise ValueError(f"Approach {approach} produces a docker tag that is already used by another approach.")
